@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defender</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- HUD para modo normal -->
+    <div id="hud">
+        <!-- Estado de la Nave -->
+        <div class="hud-section">
+            <div class="hud-section-title">Estado de la Nave</div>
+            <div class="stat">
+                <span class="label">Velocidad:</span>
+                <span class="value" id="speed">0 km/s</span>
+            </div>
+            <div class="stat">
+                <span class="label">Escudo:</span>
+                <span class="value" id="shield">100%</span>
+            </div>
+            <div class="bar-container">
+                <div class="bar-fill" id="shield-bar"></div>
+            </div>
+        </div>
+        
+        <!-- Información de Combate -->
+        <div class="hud-section">
+            <div class="hud-section-title">Información de Combate</div>
+            <div class="stat">
+                <span class="label">Enemigos Activos:</span>
+                <span class="value" id="enemies">0/4</span>
+            </div>
+            <div class="stat">
+                <span class="label">Puntuación:</span>
+                <span class="value" id="score">0</span>
+            </div>
+            <div class="stat">
+                <span class="label">⏱ Tiempo:</span>
+                <span class="value" id="game-time">0s</span>
+            </div>
+        </div>
+        
+        <!-- Radar de Amenazas -->
+        <div class="hud-section">
+            <div class="enemy-radar" id="enemy-radar">
+                <div class="radar-grid"></div>
+                <div class="radar-center"></div>
+                <div class="player-arrow" id="player-arrow"></div>
+                <div class="radar-sweep"></div>
+                <div class="radar-label-front">FRENTE</div>
+                <div class="radar-label-back">ATRÁS</div>
+                <div class="radar-label-left">IZQ</div>
+                <div class="radar-label-right">DER</div>
+            </div>
+            <div class="stat">
+                <span class="label">Más Cercano:</span>
+                <span class="value" id="closest-enemy">-</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game Over para modo normal -->
+    <div id="game-over">
+        <h2>GAME OVER</h2>
+        <p>Tu escudo ha sido destruido</p>
+        <p>Puntuación Final: <span id="final-score">0</span></p>
+        <p>Tiempo de Supervivencia: <span id="survival-time">0s</span></p>
+        <button id="restart-button">REINICIAR JUEGO</button>
+    </div>
+    
+    <!-- Controles -->
+    <div id="controls">
+        <strong>🎮 CONTROLES:</strong><br>
+        W/S: Acelerar/Frenar<br>
+        A/D: Girar Izquierda/Derecha<br>
+        Q/E: Inclinar Arriba/Abajo<br>
+        Espacio: Turbo + Disparar<br>
+        Click: Disparar<br>
+        <strong>Gamepad:</strong><br>
+        Stick Izq: Acelerar/Frenar + Girar<br>
+        Stick Der: Inclinar Arriba/Abajo<br>
+        Gatillo Der (RT): Disparar<br>
+        Botón B: Turbo
+    </div>
+
+    <!-- Botón de activación de audio -->
+    <button id="unlockAudioButton" >
+        ACTIVAR SONIDO
+    </button>
+
+    <!-- Contenedores para HUD en VR -->
+    <div id="vr-hud-container" style="display: none;"></div>
+    <div id="vr-game-over-container" style="display: none;"></div>
+    <div id="vr-radar-container" style="display: none;"></div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/",
+            "cannon-es": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"
+        }
+    }
+    </script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
